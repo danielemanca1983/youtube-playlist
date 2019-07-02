@@ -1,15 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
+import Video  from './Video';
 
 const Videos = ( {videos, loading} ) => {
 
-  if(loading) {
-    return <p>Loading...</p>;
-  }
+  let [ selected, setSelected ] = useState();
 
   return (
+    <>
+    {selected && <Video video={selected} onClose={() => setSelected(null)} />}
     <main className="yt-playlist">
-      {videos && videos.map && videos.map(video => (
-        <div className="yt-playlist__item">
+      {videos && !selected && videos.map(video => (
+        <div className="yt-playlist__item" onClick={() => setSelected(video) }>
           <figure className="yt-playlist__item__img">
             <img src={video.snippet.thumbnails.high.url} alt=""/>
             <figcaption className="yt-playlist__item__img__title">
@@ -26,6 +27,7 @@ const Videos = ( {videos, loading} ) => {
         </div>
       ))}
     </main>
+    </>
   )
 }
 

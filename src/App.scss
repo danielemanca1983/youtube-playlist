@@ -14,11 +14,19 @@
 // Color Variables
 $color-primary:   #50e3c2;
 $color-secondary: #aeaeae;
+$color-tertiary:  #676767;
+
+// Fade In Animation
+
+@-webkit-keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+@-moz-keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+@keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
 
  * {
    margin: 0;
    padding: 0;
    box-sizing: border-box;
+   font-family: 'Roboto', sans-serif;
  }
 
 .yt-header {
@@ -41,6 +49,13 @@ $color-secondary: #aeaeae;
   }
 }
 
+.heading-primary {
+  font-size: 30px;
+  color: $color-primary;
+  margin-bottom: 1.5rem;
+  font-family: 'alfa_slab_oneregular', sans-serif;
+}
+
 .yt-playlist {
   z-index: 80;
   margin-top: 40px;
@@ -56,10 +71,45 @@ $color-secondary: #aeaeae;
   background-size: cover;
   background-repeat: no-repeat;
   background-image: url(images/main_bg.png);
+
+  &--flex {
+    display: flex;
+
+    .yt-playlist__video__play {
+      flex: 0 0 70%;
+      padding-right: 2rem;
+    }
+  
+    .yt-playlist__video__info {
+      flex: 0 0 30%;
+      color: white;
+
+      &__desc {
+        font-size: 16px;
+        margin-bottom: 1.5rem;
+        color: $color-secondary;
+      }
+
+      &__published-date {
+        font-size: 15px;
+        margin-bottom: 1.5rem;
+        color: $color-tertiary;
+      }
+
+      &__back {
+        text-decoration: none;
+        color: $color-primary;
+      }
+    }
+  }
 }
 
 .yt-playlist__item {
   max-height: 280px;
+  opacity: 0;  /* make things invisible upon start */
+  animation:fadeIn ease-in 1;
+  animation-fill-mode:forwards;
+  animation-duration:1s;
   &__img {
     img {
       width: 100%;

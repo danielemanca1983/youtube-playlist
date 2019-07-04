@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Video  from './Video';
 
-const Videos = ( {videos, loading} ) => {
+const Videos = ( {videos} ) => {
 
   let [ selected, setSelected ] = useState();
 

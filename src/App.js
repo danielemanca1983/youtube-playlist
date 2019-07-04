@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import './App.scss';
 import Videos from './components/Videos';
+import Pagination from './components/Pagination';
 import axios from 'axios';
-import { loadPartialConfig } from '@babel/core';
+//import { loadPartialConfig } from '@babel/core';
 
 const App= () => {
   const [videos, setVideos] = useState([]);
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const [videosPerPage, setVideosPertPage] = useState(9);
+  const [videosPerPage] = useState(6);
   
   useEffect(() => {
     const fetchVideos = async () => {
@@ -20,14 +21,26 @@ const App= () => {
     fetchVideos();
   }, []);
 
-  console.log(videos);
+  //Change Page
+
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
+  // Get Current Videos
+  const indexOfLastVideo = currentPage * videosPerPage;
+  const indexOfFirstVideo = indexOfLastVideo - videosPerPage;
+  const currentVideos = videos.slice(indexOfFirstVideo, indexOfLastVideo);
 
   return (
     <div className="yt-wrapper">
       <header className="yt-header">
         <h1>MusicPlay</h1>
       </header>
-      <Videos videos={videos} loading={loading} />
+      <Videos videos={currentVideos} loading={loading} />
+      <Pagination 
+        videosPerPage={videosPerPage} 
+        totalVideos={videos.length} 
+        paginate={paginate} 
+      />
     </div>
   );
 }

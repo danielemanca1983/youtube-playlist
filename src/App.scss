@@ -15,6 +15,7 @@
 $color-primary:   #50e3c2;
 $color-secondary: #aeaeae;
 $color-tertiary:  #676767;
+$breakpoint-mobile:   768px;
 
 // Fade In Animation
 
@@ -58,58 +59,78 @@ $color-tertiary:  #676767;
 
 .yt-playlist {
   z-index: 80;
-  margin-top: 40px;
-  @supports (display: grid) {
-    display: grid; 
-    grid-template-columns: 1fr 1fr 1fr; 
-    grid-template-rows: 1fr 1fr 1fr; 
-    grid-column-gap: 30px;
-    grid-row-gap: 30px; 
-  }
+  display: flex;
+  flex-wrap: wrap;
   padding: 60px;
-  height: 2000px;
+  margin-top: 40px;
   background-size: cover;
   background-repeat: no-repeat;
   background-image: url(images/main_bg.png);
 
-  &--flex {
-    display: flex;
-
-    .yt-playlist__video__play {
-      flex: 0 0 70%;
-      padding-right: 2rem;
+  .yt-playlist__video__play {
+    flex: 0 0 70%;
+    padding-right: 2rem;
+    @media only screen and (max-width: 768px) {
+      flex: 0 0 100%;
+      padding-right: 0;
     }
-  
-    .yt-playlist__video__info {
-      flex: 0 0 30%;
-      color: white;
+  }
 
-      &__desc {
-        font-size: 16px;
-        margin-bottom: 1.5rem;
-        color: $color-secondary;
-      }
+  .yt-playlist__video__info {
+    flex: 0 0 30%;
 
-      &__published-date {
-        font-size: 15px;
-        margin-bottom: 1.5rem;
-        color: $color-tertiary;
-      }
+    @media only screen and (max-width: 768px) {
+      flex: 0 0 100%;
+    }
 
-      &__back {
-        text-decoration: none;
-        color: $color-primary;
-      }
+    &__desc {
+      font-size: 16px;
+      margin-bottom: 1.5rem;
+      color: $color-secondary;
+    }
+
+    &__published-date {
+      font-size: 15px;
+      margin-bottom: 1.5rem;
+      color: $color-tertiary;
+    }
+
+    &__back {
+      text-decoration: none;
+      color: $color-primary;
     }
   }
 }
 
 .yt-playlist__item {
-  max-height: 280px;
+  min-height: 280px;
+  margin-right: 30px;
+  width: calc(100% / 3 - 30px);
   opacity: 0;  /* make things invisible upon start */
   animation:fadeIn ease-in 1;
   animation-fill-mode:forwards;
   animation-duration:1s;
+  margin-bottom: 30px;
+  &:nth-child(3n) {
+    margin-right: 0;
+  }
+
+  @media only screen and (max-width: 1024px) {
+    width: calc(100% / 2 - 30px);
+    margin-right: 30px;
+    &:nth-child(3n) {
+      margin-right: 30px;
+    }
+    &:nth-child(2n) {
+      margin-right: 0;
+    }
+  }
+
+  @media only screen and (max-width: 768px) {
+    width: 100%;
+    margin-right: 0;
+  }
+  
   &__img {
     img {
       width: 100%;

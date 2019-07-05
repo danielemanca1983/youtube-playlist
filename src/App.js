@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import './App.scss';
 import Videos from './components/Videos';
-import Pagination from './components/Pagination';
 import axios from 'axios';
-//import { loadPartialConfig } from '@babel/core';
 
-const App= () => {
+const App = () => {
   const [videos, setVideos] = useState([]);
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
@@ -35,12 +33,7 @@ const App= () => {
       <header className="yt-header">
         <h1>MusicPlay</h1>
       </header>
-      <Videos videos={currentVideos} loading={loading} />
-      <Pagination 
-        videosPerPage={videosPerPage} 
-        totalVideos={videos.length} 
-        paginate={paginate} 
-      />
+      <Videos videos={currentVideos} loading={loading} paginate={paginate} videosPerPage={videosPerPage} countOfAllVideos={videos.length}/>
     </div>
   );
 }

@@ -62,7 +62,9 @@ $breakpoint-mobile:   768px;
   display: flex;
   flex-wrap: wrap;
   padding: 60px;
+  min-height: 700px;
   margin-top: 40px;
+  position: relative;
   background-size: cover;
   background-repeat: no-repeat;
   background-image: url(images/main_bg.png);
@@ -178,8 +180,11 @@ $breakpoint-mobile:   768px;
 }
 
 nav {
+  left: 0;
+  bottom: 0;
   width: 100%;
   padding: 20px 0;
+  position: absolute;
   background-color: $color-primary;
   .youtube__playlist__pagination {
     width: 100px;

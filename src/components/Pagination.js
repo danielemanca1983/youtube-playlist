@@ -5,6 +5,7 @@ const Pagination = ({ videosPerPage, totalVideos, paginate }) => {
   for(let i = 1; i <= Math.ceil(totalVideos / videosPerPage); i++) {
     pageNumbers.push(i);
   }
+  console.log(videosPerPage, totalVideos);
   return(
     <nav>
       <ul className="youtube__playlist__pagination">

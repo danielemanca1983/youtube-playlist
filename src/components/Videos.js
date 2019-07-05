@@ -1,14 +1,25 @@
 import React, { useState } from 'react';
 import Video  from './Video';
+import Pagination from './Pagination';
 
-const Videos = ( {videos} ) => {
+const Videos = ( {videos, videosPerPage, paginate, countOfAllVideos} ) => {
 
   let [ selected, setSelected ] = useState();
+
+  const formatDate = (date) => {
+    const _date = new Date(date);
+    const options = { year: 'numeric', month: 'short', day: 'numeric' };
+    return _date.toLocaleDateString("en-US", options); 
+  }
+
+  const cropText = (txt) => { 
+    return txt.length > 200 ? txt.substring(0, 200) + '...' : txt;
+  }
 
   return (
     <>
     {selected && <Video video={selected} onClose={() => setSelected(null)} />}
-    <main className="yt-playlist">
+    <div className="yt-playlist">
       {videos && !selected && videos.map(video => (
         <div className="yt-playlist__item" onClick={() => setSelected(video) }>
           <figure className="yt-playlist__item__img">
@@ -19,14 +30,19 @@ const Videos = ( {videos} ) => {
             </figcaption>
           </figure>
           <div className="yt-playlist__item__date-published">
-            <span>Published on {Date.parse(video.snippet.publishedAt)}</span>
+            <span>Published on {formatDate(video.snippet.publishedAt)}</span>
           </div>
           <div className="yt-playlist__item__desc">
-            {video.snippet.description}
+            {cropText(video.snippet.description)}
           </div>
         </div>
       ))}
-    </main>
+      {!selected && <Pagination 
+        videosPerPage={videosPerPage} 
+        totalVideos={countOfAllVideos} 
+        paginate={paginate} 
+      />}
+    </div>
     </>
   )
 }

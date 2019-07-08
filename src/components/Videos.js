@@ -19,8 +19,9 @@ const Videos = ( {videos, videosPerPage, paginate, countOfAllVideos} ) => {
   return (
     <>
     {selected && <Video video={selected} onClose={() => setSelected(null)} />}
-    <div className="yt-playlist">
-      {videos && !selected && videos.map(video => (
+    {videos && !selected && 
+    <main className="yt-playlist">
+      {videos.map(video => (
         <div className="yt-playlist__item" onClick={() => setSelected(video) }>
           <figure className="yt-playlist__item__img">
             <img src={video.snippet.thumbnails.high.url} alt=""/>
@@ -42,7 +43,8 @@ const Videos = ( {videos, videosPerPage, paginate, countOfAllVideos} ) => {
         totalVideos={countOfAllVideos} 
         paginate={paginate} 
       />}
-    </div>
+    </main>
+    }
     </>
   )
 }

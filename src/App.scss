@@ -38,6 +38,8 @@ $breakpoint-mobile:   768px;
   z-index: 100;
   padding: 0 60px;
   position: fixed;
+  background-size: 100% 40px;
+  background-repeat: no-repeat;
   background-image: url(images/header_bg.png);
   h1 {
     color: black;
